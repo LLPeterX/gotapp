@@ -55,19 +55,23 @@ class gotService {
   }
 
   // Получить книги
-  getBooks() {
-    return this.getResource('/books');
+  async getBooks() {
+    const books = await this.getResource('/books');
+    return books.map(this._transformBook);
   }
-  getBook(id) {
-    return this.getResource('/books/'+id);
+  async getBook(id) {
+    const book = await this.getResource('/books/'+id);
+    return this._transformBook(book);
   }
 
   // получить дома
-  getAllHouses() {
-    return this.getResource('/houses');
+  async getAllHouses() {
+    const houses = await this.getResource('/houses');
+    return houses.map(this._tranformHouse);
   }
-  getHouse(id) {
-    return this.getResource('/houses/'+id);
+  async getHouse(id) {
+    const house = await this.getResource('/houses/'+id);
+    return this._tranformHouse(house);
   }
 }
 
