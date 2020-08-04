@@ -18,7 +18,8 @@ class gotService {
       gender: char.gender,
       born: char.born,
       died: char.died,
-      culture: char.culture
+      culture: char.culture,
+      url: char.url
     }
   }
 
@@ -53,9 +54,14 @@ class gotService {
     const character = await this.getResource(`/characters/${id}`);
     return this._transformCharacter(character);
   }
+  async GetCharacterByURL(url) {
+    const newUrl = url.replace(this._apiBase,'');
+    const character = await this.getResource(newUrl);
+    return this._transformCharacter(character);
+  }
 
   // Получить книги
-  async getBooks() {
+  async getAllBooks() {
     const books = await this.getResource('/books');
     return books.map(this._transformBook);
   }
@@ -73,17 +79,12 @@ class gotService {
     const house = await this.getResource('/houses/'+id);
     return this._tranformHouse(house);
   }
+
+  getIdFromURL(url) {
+    const id=+url.match(/(\d+)/)[0];
+    return id;
+ }
+ 
 }
 
 export default gotService;
-
-/*
-//UsageЖ
-const got = new GOTService();
-got.getAllCharacters()
-  .then(chars => chars.forEach(char => console.log(char.name)))
-  .catch(err => console.log("Ошибка: ", err));
-got.getCharacter(43)
-  .then(char => console.log(char.name));
-
-*/

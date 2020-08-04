@@ -9,33 +9,40 @@ import CharDetails from '../charDetails';
 class App extends React.Component {
     constructor() {
         super();
-        this.state = {charVisible: true};
+        this.state = {
+            charVisible: true,
+            selectedChar: null
+        };
         this.toggleVisible = this.toggleVisible.bind(this);
+        this.onCharSelect = this.onCharSelect.bind(this);
     }
-    
+
     toggleVisible() {
-        this.setState({charVisible: !this.state.charVisible});
+        this.setState({ charVisible: !this.state.charVisible });
+    }
+
+    onCharSelect(id) {
+        console.log('set id to',id);
+        this.setState({selectedChar: id});
     }
 
     render() {
-        const visible = this.state.charVisible;
-        console.log('Visible: '+visible);
         return (
             <>
                 <Container>
                     <Header />
                 </Container>
                 <Container>
-                    {this.state.charVisible ? <RandomCharBlock/> : null}
+                    {this.state.charVisible ? <RandomCharBlock /> : null}
                     <Row>
                         <button onClick={this.toggleVisible}>Toggle Random Character</button>
                     </Row>
                     <Row>
                         <Col md='6'>
-                            <ItemList />
+                            <ItemList onCharSelect={this.onCharSelect}/>
                         </Col>
                         <Col md='6'>
-                            <CharDetails />
+                            <CharDetails charId={this.state.selectedChar}/>
                         </Col>
                     </Row>
                 </Container>
@@ -47,10 +54,10 @@ class App extends React.Component {
 const RandomCharBlock = () => {
     return (
         <Row>
-        <Col lg={{ size: 5, offset: 0 }}>
-            <RandomChar />
-        </Col>
-    </Row>
+            <Col lg={{ size: 5, offset: 0 }}>
+                <RandomChar />
+            </Col>
+        </Row>
 
     );
 
