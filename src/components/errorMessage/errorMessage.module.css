@@ -1,5 +1,17 @@
-.red {
+.container {
+  width: 600px;
+  position: relative;
+  text-align: center;
+}
+
+img {
+  width: 100%;
+}
+
+.text {
   color: red;
-  font-weight: bold;
-  text-align: center; 
+  z-index: 999;
+  position: absolute;
+  left: 16px;
+  top: 8px;
 }

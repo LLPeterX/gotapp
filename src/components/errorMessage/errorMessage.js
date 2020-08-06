@@ -1,13 +1,14 @@
-import React from 'react'
+import React from 'react';
+import img from './error.jpg';
 import style from './errorMessage.module.css'
 
-export default class ErrorMessage extends React.Component {
-  render() {
-    return(
-      <React.Fragment>
-        <span className={style.red}>Что-то пошло не так</span>
-      </React.Fragment>
-    );
-  }
-  
+const ErrorMessage = () => {
+  return (
+    <div className={style.container}>
+      <img src={img} alt="Error"></img>
+      <div className={style.text}>Something goes wrong :(</div>
+    </div>
+  )
+
 }
+export default ErrorMessage;

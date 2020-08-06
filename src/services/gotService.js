@@ -44,6 +44,11 @@ class gotService {
     }
   }
 
+  getIdFromURL(url) {
+    const id=+url.match(/(\d+)/)[0];
+    return id;
+ }
+
   async getAllCharacters() {
     // Первые персонажи "пустые". Чтобы их пропустить, начнем с 5-й страницы и по 10 персонажей в каждой
     const res = await this.getResource('/characters?page=5&pageSize=10');
@@ -80,11 +85,6 @@ class gotService {
     return this._tranformHouse(house);
   }
 
-  getIdFromURL(url) {
-    const id=+url.match(/(\d+)/)[0];
-    return id;
- }
- 
 }
 
 export default gotService;
