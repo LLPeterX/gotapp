@@ -15,7 +15,7 @@ export default class CharDetails extends Component {
         this.gotService.getCharacter(charId)
             .then(char => this.setState({ char }));
 
-        this.foo.bar = 0; // generate error    
+        //this.foo.bar = 0; // generate error    
     }
     componentDidMount() {
         this.updateChar();

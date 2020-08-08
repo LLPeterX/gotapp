@@ -1,40 +1,45 @@
 import React, { Component } from 'react';
 import './itemList.css';
-import gotService from '../../services/gotService';
 import Spinner from '../spinner';
+//import getIdFromURL from '../../services/getIdFromURL'
 
 export default class ItemList extends Component {
 
-    gotService = new gotService(); // новый синтаксис ES - без конструктора
-    state = { charList: null } // но далее при вызовах всё равно нужен this
+    //gotService = new gotService(); // новый синтаксис ES - без конструктора
+    state = { itemList: null } // но далее при вызовах всё равно нужен this
 
     componentDidMount() {
-        this.gotService.getAllCharacters().then(charList => this.setState({ charList }));
+        const {getData} = this.props;
+
+         getData()
+            .then(itemList => this.setState({ itemList }));
     }
 
     renderItems(arr) {
-        return arr.map((char, i) => { // i нужен для key; не самый хороший способ
-            const id=this.gotService.getIdFromURL(char.url);
+        return arr.map((item, i) => { // i нужен для key; не самый хороший способ
+            //const id = getIdFromURL(item.url);
+            const id=item.id;
+            const label = this.props.renderItem(item);
             return (
                 <li
                     className="list-group-item"
                     key={id}
-                    onClick={()=>this.props.onCharSelect(id)}
+                    onClick={() => this.props.onItemSelect(id)}
                 >
-                    {char.name}
+                {label}
                 </li>
             )
         })
     }
 
     render() {
-        const { charList } = this.state;
-        if (!charList) {
+        const { itemList } = this.state;
+        if (!itemList) {
             return <Spinner />
         }
         return (
             <ul className="item-list list-group">
-                {this.renderItems(charList)}
+                {this.renderItems(itemList)}
             </ul>
         );
     }

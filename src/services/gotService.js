@@ -3,8 +3,8 @@ class gotService {
     this._apiBase = 'https://www.anapioficeandfire.com/api';
   }
 
-  async getResource(url) {
-    const res = await fetch(this._apiBase+url);
+  getResource = async (url) => {
+    const res = await fetch(this._apiBase + url);
     if (res.ok) {
       return await res.json();
     } else {
@@ -12,8 +12,14 @@ class gotService {
     }
   }
 
-  _transformCharacter(char) {
+  _getIdFromURL = (url) => {
+    const id = +url.match(/(\d+)/)[0];
+    return id;
+  }
+
+  _transformCharacter = (char) => {
     return {
+      id: this._getIdFromURL(char.url),
       name: char.name,
       gender: char.gender,
       born: char.born,
@@ -23,65 +29,58 @@ class gotService {
     }
   }
 
-  _tranformHouse(house) {
+  _tranformHouse = (house) => {
     return {
+      id: this._getIdFromURL(house.url),
       name: house.name,
       region: house.region,
       words: house.words,
       titles: house.titles,
       overlord: house.overlord,
-      ancestralWeapons: house.ancestralWeapons,
-
+      ancestralWeapons: house.ancestralWeapons, // array!
+      url: house.url
     }
   }
 
-  _transformBook(book) {
+  _transformBook = (book) => {
     return {
+      id: this._getIdFromURL(book.url),
       name: book.name,
       numberOfPages: book.numberOfPages,
       publisher: book.publisher,
-      released: book.released
+      released: new Date(book.released).getFullYear(),
+      url: book.url
     }
   }
 
-  getIdFromURL(url) {
-    const id=+url.match(/(\d+)/)[0];
-    return id;
- }
-
-  async getAllCharacters() {
+  getAllCharacters = async () => {
     // Первые персонажи "пустые". Чтобы их пропустить, начнем с 5-й страницы и по 10 персонажей в каждой
     const res = await this.getResource('/characters?page=5&pageSize=10');
     return res.map(this._transformCharacter); // возвращаем массив объектов
   }
 
-  async getCharacter(id) {
+  getCharacter = async (id) => {
     const character = await this.getResource(`/characters/${id}`);
-    return this._transformCharacter(character);
-  }
-  async GetCharacterByURL(url) {
-    const newUrl = url.replace(this._apiBase,'');
-    const character = await this.getResource(newUrl);
     return this._transformCharacter(character);
   }
 
   // Получить книги
-  async getAllBooks() {
+  getAllBooks = async () => {
     const books = await this.getResource('/books');
     return books.map(this._transformBook);
   }
-  async getBook(id) {
-    const book = await this.getResource('/books/'+id);
+  getBook = async (id) => {
+    const book = await this.getResource('/books/' + id);
     return this._transformBook(book);
   }
 
   // получить дома
-  async getAllHouses() {
+  getAllHouses = async () => {
     const houses = await this.getResource('/houses');
     return houses.map(this._tranformHouse);
   }
-  async getHouse(id) {
-    const house = await this.getResource('/houses/'+id);
+  getHouse = async (id) => {
+    const house = await this.getResource('/houses/' + id);
     return this._tranformHouse(house);
   }
 
