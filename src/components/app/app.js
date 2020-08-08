@@ -49,7 +49,7 @@ class App extends React.Component {
                     <Row>
                         <Col md="6">
                             <ItemList onItemSelect={this.onCharSelect} getData={this.gotService.getAllBooks} 
-                            renderItem={(item)=>`${item.name} (${item.released})`}/>
+                            renderItem={(item)=>(`<><span>${item.name} (${item.released})</span> <button>Click Me</button></>`)}/>
                         </Col>
                         <Col md="6">
                             <CharDetails charId={this.state.selectedChar} />
