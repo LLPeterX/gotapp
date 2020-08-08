@@ -5,19 +5,15 @@ import Spinner from '../spinner';
 
 export default class ItemList extends Component {
 
-    //gotService = new gotService(); // новый синтаксис ES - без конструктора
     state = { itemList: null } // но далее при вызовах всё равно нужен this
 
     componentDidMount() {
         const {getData} = this.props;
-
-         getData()
-            .then(itemList => this.setState({ itemList }));
+        getData().then(itemList => this.setState({ itemList }));
     }
 
     renderItems(arr) {
-        return arr.map((item, i) => { // i нужен для key; не самый хороший способ
-            //const id = getIdFromURL(item.url);
+        return arr.map((item) => { 
             const id=item.id;
             const label = this.props.renderItem(item);
             return (
