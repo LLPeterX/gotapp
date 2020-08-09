@@ -68,6 +68,7 @@ class gotService {
   }
   getBook = async (id) => {
     const book = await this.getResource('/books/' + id);
+    console.log(this._transformBook(book));
     return this._transformBook(book);
   }
 

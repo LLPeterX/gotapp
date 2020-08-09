@@ -4,16 +4,16 @@ import Spinner from '../spinner';
 
 export default class ItemList extends Component {
 
-    state = { itemList: null } // но далее при вызовах всё равно нужен this
+    state = { itemList: null }
 
     componentDidMount() {
-        const {getData} = this.props;
+        const { getData } = this.props;
         getData().then(itemList => this.setState({ itemList }));
     }
 
     renderItems(arr) {
-        return arr.map((item) => { 
-            const id=item.id;
+        return arr.map((item) => {
+            const id = item.id;
             const label = this.props.renderItem(item);
             return (
                 <li
@@ -21,7 +21,7 @@ export default class ItemList extends Component {
                     key={id}
                     onClick={() => this.props.onItemSelect(id)}
                 >
-                {label}
+                    {label}
                 </li>
             )
         })

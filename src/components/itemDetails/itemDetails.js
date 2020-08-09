@@ -20,7 +20,8 @@ export default class ItemDetails extends Component {
         if (!itemId) {
             return;
         }
-        this.gotService.getCharacter(itemId)
+        //this.gotService.getCharacter(itemId) // засада!!!
+        this.props.getData(itemId)
             .then(item => this.setState({ item }));
     }
     componentDidMount() {

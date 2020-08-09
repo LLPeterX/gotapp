@@ -3,10 +3,10 @@ import { Col, Row, Container } from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage'
-import CharacterPage from '../characterPage';
-import ItemList from '../itemList';
+import CharacterPage from '../pages/characterPage';
 import gotService from '../../services/gotService'
-import ItemDetails from '../itemDetails'
+import BooksPage from '../pages/booksPage';
+import HousesPage from '../pages/housesPage';
 
 
 class App extends React.Component {
@@ -45,7 +45,8 @@ class App extends React.Component {
                     </Row>
                     <CharacterPage />
                     {/* Books */}
-                    <Row>
+                    <BooksPage />
+                    {/* <Row>
                         <Col md="6">
                             <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllBooks} 
                             renderItem={(item)=>(`${item.name} <span>(${item.released})</span>`)}/>
@@ -53,9 +54,9 @@ class App extends React.Component {
                         <Col md="6">
                             <ItemDetails charId={this.state.selectedChar} />
                         </Col>
-                    </Row>
+                    </Row> */}
                     {/* Houses */}
-                    <Row>
+                    {/* <Row>
                         <Col md="6">
                             <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllHouses} 
                             renderItem={(item) => `${item.name} - ${item.region}`}/>
@@ -64,7 +65,8 @@ class App extends React.Component {
                             <ItemDetails charId={this.state.selectedChar} />
                         </Col>
 
-                    </Row>
+                    </Row> */}
+                    <HousesPage />
                 </Container>
             </>
         );
