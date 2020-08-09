@@ -6,7 +6,7 @@ import ErrorMessage from '../errorMessage'
 import CharacterPage from '../characterPage';
 import ItemList from '../itemList';
 import gotService from '../../services/gotService'
-import CharDetails from '../charDetails'
+import ItemDetails from '../itemDetails'
 
 
 class App extends React.Component {
@@ -44,22 +44,24 @@ class App extends React.Component {
                         <button onClick={this.toggleVisible}>Toggle Random Character</button>
                     </Row>
                     <CharacterPage />
+                    {/* Books */}
                     <Row>
                         <Col md="6">
                             <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllBooks} 
                             renderItem={(item)=>(`${item.name} <span>(${item.released})</span>`)}/>
                         </Col>
                         <Col md="6">
-                            <CharDetails charId={this.state.selectedChar} />
+                            <ItemDetails charId={this.state.selectedChar} />
                         </Col>
                     </Row>
+                    {/* Houses */}
                     <Row>
                         <Col md="6">
                             <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllHouses} 
                             renderItem={(item) => `${item.name} - ${item.region}`}/>
                         </Col>
                         <Col md="6">
-                            <CharDetails charId={this.state.selectedChar} />
+                            <ItemDetails charId={this.state.selectedChar} />
                         </Col>
 
                     </Row>
