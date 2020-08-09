@@ -24,8 +24,7 @@ class gotService {
       gender: char.gender,
       born: char.born,
       died: char.died,
-      culture: char.culture,
-      url: char.url
+      culture: char.culture
     }
   }
 
@@ -37,8 +36,7 @@ class gotService {
       words: house.words,
       titles: house.titles,
       overlord: house.overlord,
-      ancestralWeapons: house.ancestralWeapons, // array!
-      url: house.url
+      ancestralWeapons: house.ancestralWeapons // array!
     }
   }
 
@@ -49,7 +47,6 @@ class gotService {
       numberOfPages: book.numberOfPages,
       publisher: book.publisher,
       released: new Date(book.released).getFullYear(),
-      url: book.url
     }
   }
 

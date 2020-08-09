@@ -24,8 +24,6 @@ class App extends React.Component {
         this.setState({ charVisible: !this.state.charVisible });
     }
 
-
-
     componentDidCatch() {
         console.log('Error');
         this.setState({ error: true });
@@ -48,8 +46,8 @@ class App extends React.Component {
                     <CharacterPage />
                     <Row>
                         <Col md="6">
-                            <ItemList onItemSelect={this.onCharSelect} getData={this.gotService.getAllBooks} 
-                            renderItem={(item)=>(`${item.name} (${item.released})`)}/>
+                            <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllBooks} 
+                            renderItem={(item)=>(`${item.name} <span>(${item.released})</span>`)}/>
                         </Col>
                         <Col md="6">
                             <CharDetails charId={this.state.selectedChar} />
@@ -57,7 +55,7 @@ class App extends React.Component {
                     </Row>
                     <Row>
                         <Col md="6">
-                            <ItemList onItemSelect={this.onCharSelect} getData={this.gotService.getAllHouses} 
+                            <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllHouses} 
                             renderItem={(item) => `${item.name} - ${item.region}`}/>
                         </Col>
                         <Col md="6">

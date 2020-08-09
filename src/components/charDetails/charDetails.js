@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import './charDetails.css';
 import gotService from '../../services/gotService';
-//import Spinner from '../spinner';
+
+export const Field = ({item, field, label}) => {
+    return (
+        <li className="list-group-item d-flex justify-content-between">
+        <span className="term">{label}</span>
+        <span>{item[field]}</span>
+        {/* <span>{field}</span> */}
+    </li>
+
+    );
+}
 
 export default class CharDetails extends Component {
     gotService = new gotService();
-    state = { char: null };
+    state = { item: null };
 
     updateChar() {
         const charId = this.props.charId;
@@ -13,9 +23,7 @@ export default class CharDetails extends Component {
             return;
         }
         this.gotService.getCharacter(charId)
-            .then(char => this.setState({ char }));
-
-        //this.foo.bar = 0; // generate error    
+            .then(item => this.setState({ item }));
     }
     componentDidMount() {
         this.updateChar();
@@ -29,16 +37,16 @@ export default class CharDetails extends Component {
     }
 
     render() {
-        if (!this.state.char) {
-            return <span className="select-error">Please select a character</span>;
-            //return <Spinner/>;
+        if (!this.state.item) {
+            return <span className="select-error">Please select a item</span>;
         }
-        const { name, gender, born, died, culture } = this.state.char;
+        const {item}  = this.state
+        const {name}  = item;
         return (
             <div className="char-details rounded">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item d-flex justify-content-between">
+                    {/* <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Gender</span>
                         <span>{gender}</span>
                     </li>
@@ -53,7 +61,12 @@ export default class CharDetails extends Component {
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Culture</span>
                         <span>{culture}</span>
-                    </li>
+                    </li> */}
+                    {
+                        React.Children.map(this.props.children,(child) => {
+                            return React.cloneElement(child, {item});
+                        })
+                    }
                 </ul>
             </div>
         );
