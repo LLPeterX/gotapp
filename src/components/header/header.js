@@ -1,24 +1,24 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import './header.css';
-//import styled from 'styled-components';
 
 const Header = () => {
     return (
         <div className="headerBlock">
             <div className="headerTitle">
-                <a href="#">
+                <Link to="/">
                 Game of Thrones DB
-                </a>
+                </Link>
             </div>
             <ul className="headerLinks">
                 <li>
-                    <a href="#">Персонажи</a>
+                <Link to="/characters">Персонажи</Link>
                 </li>
                 <li>
-                    <a href="#">Дома</a>
+                    <Link to="/houses">Дома</Link>
                 </li>
                 <li>
-                    <a href="#">Книги</a>   
+                    <Link to="/books">Книги</Link>   
                 </li>
             </ul>
         </div>

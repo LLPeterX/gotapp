@@ -7,6 +7,7 @@ import CharacterPage from '../pages/characterPage';
 import gotService from '../../services/gotService'
 import BooksPage from '../pages/booksPage';
 import HousesPage from '../pages/housesPage';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
 class App extends React.Component {
@@ -34,41 +35,30 @@ class App extends React.Component {
             return <ErrorMessage />
         }
         return (
-            <>
-                <Container>
-                    <Header />
-                </Container>
-                <Container>
-                    {this.state.charVisible ? <RandomCharBlock /> : null}
-                    <Row>
-                        <button onClick={this.toggleVisible}>Toggle Random Character</button>
-                    </Row>
-                    <CharacterPage />
-                    {/* Books */}
-                    <BooksPage />
-                    {/* <Row>
-                        <Col md="6">
-                            <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllBooks} 
-                            renderItem={(item)=>(`${item.name} <span>(${item.released})</span>`)}/>
-                        </Col>
-                        <Col md="6">
-                            <ItemDetails charId={this.state.selectedChar} />
-                        </Col>
-                    </Row> */}
-                    {/* Houses */}
-                    {/* <Row>
-                        <Col md="6">
-                            <ItemList onItemSelect={this.onItemSelect} getData={this.gotService.getAllHouses} 
-                            renderItem={(item) => `${item.name} - ${item.region}`}/>
-                        </Col>
-                        <Col md="6">
-                            <ItemDetails charId={this.state.selectedChar} />
-                        </Col>
+            <Router>
+                <div className="app">
+                    <Container>
+                        <Header />
+                    </Container>
+                    <Container>
+                        {this.state.charVisible ? <RandomCharBlock /> : null}
+                        <Row>
+                            <button onClick={this.toggleVisible}>Toggle Random Character</button>
+                        </Row>
+                        <Route exact path="/" component={CharacterPage} />
+                        <Route exact path="/characters" component={CharacterPage} />
+                        <Route exact path="/houses" component={HousesPage} />
+                        <Route exact path="/books" component={BooksPage} />
+                        <Route path="/books/:id?" render={(match) => {
+                            const id = match.params.id;
+                            return <BooksPage bookId={id} />
+                        }
+                        } />
 
-                    </Row> */}
-                    <HousesPage />
-                </Container>
-            </>
+
+                    </Container>
+                </div>
+            </Router>
         );
     }
 }
