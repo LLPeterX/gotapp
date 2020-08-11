@@ -6,11 +6,11 @@ import gotService from '../../services/gotService'
 import RowBlock from '../rowBlock'
 
 export default class BooksPage extends React.Component {
-  state = { selectedItem: 1, error: false };
+  state = { selectedBook: 1, error: false };
   gotService = new gotService();
 
   onBookSelect = (id) => {
-    this.setState({ selectedItem: id });
+    this.setState({ selectedBook: id });
   }
 
   componentDidCatch() {
@@ -30,7 +30,7 @@ export default class BooksPage extends React.Component {
     );
 
     const bookDetails = (
-      <ItemDetails itemId={this.state.selectedItem} getData={this.gotService.getBook}>
+      <ItemDetails itemId={this.state.selectedBook} getData={this.gotService.getBook}>
         <Field field="released" label="Released" />
         <Field field="publisher" label="Publisher" />
         <Field field="numberOfPages" label="Pages" />

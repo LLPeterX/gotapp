@@ -4,8 +4,10 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage'
 import gotService from '../../services/gotService'
-import {BooksPage, HousesPage, CharacterPage} from '../pages';
+import {BooksPage, HousesPage, CharacterPage, BooksItem} from '../pages';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import './app.css'
 
 
 class App extends React.Component {
@@ -34,7 +36,7 @@ class App extends React.Component {
         }
         return (
             <Router>
-                <div className="app">
+                <div className="app"> 
                     <Container>
                         <Header />
                     </Container>
@@ -47,9 +49,9 @@ class App extends React.Component {
                         <Route exact path="/characters" component={CharacterPage} />
                         <Route exact path="/houses" component={HousesPage} />
                         <Route exact path="/books" component={BooksPage} />
-                        <Route path="/books/:id" render={(match) => {
+                        <Route path="/books/:id" render={({match}) => {
                             const id = match.params.id;
-                            return <BooksPage bookId={id} />
+                            return <BooksItem bookId={id}/>
                         }
                         } />
 
