@@ -13,7 +13,11 @@ class gotService {
   }
 
   _getIdFromURL = (url) => {
+    if(!url) {
+      return null;
+    }
     const id = +url.match(/(\d+)/)[0];
+    console.log('id=',id);
     return id;
   }
 
@@ -35,8 +39,10 @@ class gotService {
       region: house.region,
       words: house.words,
       titles: house.titles,
-      overlord: house.overlord,
-      ancestralWeapons: house.ancestralWeapons // array!
+      //overlord: house.overlord, // url на персонажа
+      overlord: this._getIdFromURL(house.overlord),
+      ancestralWeapons: house.ancestralWeapons, // array!
+     
     }
   }
 
@@ -78,9 +84,15 @@ class gotService {
   }
   getHouse = async (id) => {
     const house = await this.getResource('/houses/' + id);
-    return this._tranformHouse(house);
+    const houseData = this._tranformHouse(house);
+    // modify overlord (URL) to name of character by id from URL
+    if(houseData.overlord) {
+      const char = await this.getCharacter(houseData.overlord);
+      houseData.overlord = char.name;
+    }
+    return houseData;
   }
 
-}
+} // end gotService
 
 export default gotService;

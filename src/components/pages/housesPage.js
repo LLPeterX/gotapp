@@ -6,7 +6,7 @@ import gotService from '../../services/gotService'
 import RowBlock from '../rowBlock'
 
 export default class HousesPage extends React.Component {
-  state = { selectedItem: 1, error: false };
+  state = { selectedItem: 1, lord: null, error: false };
   gotService = new gotService();
 
   onHouseSelect = (id) => {
