@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './itemList.css';
 import Spinner from '../spinner';
+import PropTypes from 'prop-types'
 
 export default class ItemList extends Component {
 
@@ -38,4 +39,13 @@ export default class ItemList extends Component {
             </ul>
         );
     }
+}
+
+ItemList.defaultProps = {
+    itemId: 1,
+    onItemSelected: () => {} // "чистая" функция, которая ничего не делает
+}
+
+ItemList.propTypes = {
+    onItemSelected: PropTypes.func
 }

@@ -67,7 +67,7 @@ const RandomCharBlock = () => {
     return (
         <Row>
             <Col lg={{ size: 5, offset: 0 }}>
-                <RandomChar />
+                <RandomChar interval={20000}/>
             </Col>
         </Row>
 

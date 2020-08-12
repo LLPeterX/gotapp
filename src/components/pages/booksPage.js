@@ -44,9 +44,10 @@ class BooksPage extends React.Component {
    // return <RowBlock left={booksList} right={bookDetails} />
    return (<ItemList
     onItemSelect={(itemId) => {
-      //this.props.history.push(`/books/${itemId}`)
-      console.log('itemId=',itemId); // показывет "itemId= 3" (к примеру)
-      this.props.history.push(itemId)
+      this.props.history.push(`/books/${itemId}`)
+      //console.log('itemId=',itemId); // показывет "itemId= 3" (к примеру)
+      //this.props.history.push(itemId)
+      //console.log(this.props.history);
     }}
     getData={this.gotService.getAllBooks}
     renderItem={(book) => `${book.name} (${book.released})`}

@@ -3,6 +3,7 @@ import './randomChar.css';
 import gotService from '../../services/gotService';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage'
+import PropTypes from 'prop-types'
 
 export default class RandomChar extends Component {
     constructor() {
@@ -15,7 +16,10 @@ export default class RandomChar extends Component {
         this.timerId=null;
         this.gotService = new gotService();
         this.updateCharacter = this.updateCharacter.bind(this);
-        //console.log('Конструкетор');
+    }
+
+    static defaultProps = {
+        interval: 10000
     }
 
     onCharLoaded = (char) => {
@@ -24,7 +28,6 @@ export default class RandomChar extends Component {
 
     updateCharacter() {
         const id = Math.floor(Math.random() * 140 + 25);
-        //const id=0; // generate error
         this.gotService.getCharacter(id)
             .then(this.onCharLoaded)
             .catch(this.onError)
@@ -36,20 +39,17 @@ export default class RandomChar extends Component {
 
     componentDidMount() {
         this.updateCharacter();
-        //this.timerId = setInterval(this.updateCharacter,5000);
-        //console.log('componentDidMount()');
+        this.timerId = setInterval(this.updateCharacter,this.props.interval);
     }
 
     componentWillUnmount() {
         if(this.timerId!=null) {
             clearInterval(this.timerId);
         }
-        //console.log('componentWillUnmount()');
     }
 
 
     render() {
-        //console.log('render()');
         const { char, isLoading, isError } = this.state;
         return (
             <div className="random-block rounded">
@@ -58,6 +58,20 @@ export default class RandomChar extends Component {
             </div>
         );
     }
+}
+
+// RandomChar.propTypes = {
+//     interval: (props, propName, componenName) => {
+//         const propValue = props[propName];
+//         if(typeof propValue === 'number' && !isNaN(propValue)) {
+//             return null; // check OK
+//         }
+//         return new TypeError(`${componenName}: ${propName} must be a number`);
+//     }
+// }
+
+RandomChar.propTypes = {
+    interval: PropTypes.number
 }
 
 const View = ({ char }) => {
@@ -86,4 +100,5 @@ const View = ({ char }) => {
         </>
     );
 }
+
 
