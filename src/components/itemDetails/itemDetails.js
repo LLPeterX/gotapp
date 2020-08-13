@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import './itemDetails.css';
 import gotService from '../../services/gotService';
+import { Link } from 'react-router-dom'
 
-export const Field = ({ item, field, label }) => {
+export const Field = ({ item, field, label, link }) => {
+    if (link) {
+
+        return (
+            <li className="list-group-item d-flex justify-content-between">
+                <span className="term">{label}</span>
+                <span><Link to={link}>{item[field]}</Link></span>
+            </li>
+
+        )
+    }
     return (
         <li className="list-group-item d-flex justify-content-between">
             <span className="term">{label}</span>
-            <span>{item[field]}</span>
+            {link
+                ? <span><Link to={link}>{item[field]}</Link></span>
+                : <span>{item[field]}</span>}
+            {/* <span>{item[field]}</span> */}
         </li>
     );
 }

@@ -34,7 +34,7 @@ export default class HousesPage extends React.Component {
         <Field field="region" label="Region" />
         <Field field="titles" label="Titles" />
         <Field field="words" label="Words" />
-        <Field field="overlord" label="Lord" />
+        <Field field="overlord" label="Lord" link={"/characters/"}/>
         <Field field="ancestralWeapons" label="Ancestral Weapons" />
       </ItemDetails>
     );

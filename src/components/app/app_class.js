@@ -46,9 +46,9 @@ class App extends React.Component {
                             <button onClick={this.toggleVisible}>Toggle Random Character</button>
                         </Row>
                         <Route exact path="/" component={CharacterPage} />
-                        <Route exact path="/characters/" component={CharacterPage} />
-                        <Route exact path="/houses/" component={HousesPage} />
-                        <Route exact path="/books/" component={BooksPage} />
+                        <Route exact path="/characters" component={CharacterPage} />
+                        <Route exact path="/houses" component={HousesPage} />
+                        <Route exact path="/books" component={BooksPage} />
                         <Route path="/books/:id" render={({match}) => {
                             const id = match.params.id;
                             return <BooksItem bookId={id}/>

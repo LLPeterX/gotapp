@@ -17,7 +17,7 @@ class gotService {
       return null;
     }
     const id = +url.match(/(\d+)/)[0];
-    console.log('id=',id);
+    //console.log('id=',id);
     return id;
   }
 
